@@ -10,13 +10,18 @@ var program = require('commander')
 require('shelljs/global')
 
 function testData (options) {
-  exec(config.apps.split + options.verbose + ' --sort --offset=0 --limit=5 "' + options.base + '.json" > "' + options.base + '.test1.json"')
-  exec(config.apps.split + options.verbose + ' --sort --offset=0.5 --limit=5 "' + options.base + '.json" > "' + options.base + '.test2.json"')
-  exec(config.apps.split + options.verbose + ' --sort --offset=-5 --limit=5 "' + options.base + '.json" > "' + options.base + '.test3.json"')
+  var binds1Count = parseInt(exec(config.apps.split + ' --binds=1 "' + options.base + '.json" | ' + config.apps.info + ' count').stdout)
+  var binds0Count = parseInt(exec(config.apps.split + ' --binds=0 "' + options.base + '.json" | ' + config.apps.info + ' count').stdout)
 
-  exec(config.apps.merge + options.verbose + ' "' + options.base + '.test1.json" "' + options.base + '.test2.json" "' + options.base + '.test3.json" > "' + options.base + '.test.json"')
+  var binds1TestCount = Math.ceil(binds1Count * config.testData.percentage)
+  var binds0TestCount = Math.ceil(binds0Count * config.testData.percentage)
 
-  exec('rm ' + options.base + '.test1.json ' + options.base + '.test2.json ' + options.base + '.test3.json')
+  exec(config.apps.split + options.verbose + ' --binds=1 --shuffle --offset=0 --limit=' + binds1TestCount + ' "' + options.base + '.json" > "' + options.base + '.test1.json"')
+  exec(config.apps.split + options.verbose + ' --binds=0 --shuffle --offset=0 --limit=' + binds0TestCount + ' "' + options.base + '.json" > "' + options.base + '.test0.json"')
+
+  exec(config.apps.merge + options.verbose + ' "' + options.base + '.test1.json" "' + options.base + '.test0.json" > "' + options.base + '.test.json"')
+
+  exec('rm ' + options.base + '.test1.json ' + options.base + '.test0.json')
 
   if (options.alternatives) {
     exec(config.apps.alternative + options.verbose + ' --alternatives=' + options.alternatives + ' "' + options.base + '.test.json" > "' + options.base + '.test.alternatives.json"')

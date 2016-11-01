@@ -12,8 +12,8 @@ require('shelljs/global')
 function tokenizeAndBuildMap (options) {
   exec(config.apps.tokenize + options.verbose + ' "' + options.base + '.json" > "' + options.base + '.tokenized.json"')
 
-  exec(config.apps.buildNnMapping + options.verbose + ' mapping "' + options.base + '.tokenized.json" > "' + options.base + '.mapping.json"')
-  exec(config.apps.buildNnMapping + options.verbose + ' model "' + options.base + '.tokenized.json" > "' + options.base + '.modelio.json"')
+  exec(config.apps.buildNnMapping + options.verbose + options.properties + ' mapping "' + options.base + '.tokenized.json" > "' + options.base + '.mapping.json"')
+  exec(config.apps.buildNnMapping + options.verbose + options.properties + ' model "' + options.base + '.tokenized.json" > "' + options.base + '.modelio.json"')
 }
 
 function createMapping () {
@@ -25,6 +25,7 @@ function createMapping () {
   options.base = path.join(options.output, options.key)
   options.verbose = program.verbose
   options.verbose = options.verbose ? ' --verbose' : ''
+  options.properties = program.properties ? ' --properties=' + program.properties : ''
 
   mkdir('-p', options.output)
 
@@ -36,6 +37,7 @@ program
   .usage('[options] <target>')
   .option('-v, --verbose', 'verbose output')
   .option('-o, --output <path>', 'output folder')
+  .option('-p, --properties <n>', 'list of output properties as comma separated list')
 
 program.parse(process.argv)
 
