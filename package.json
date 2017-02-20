@@ -21,8 +21,8 @@
   "dependencies": {
     "commander": "^2.9.0",
     "ligand-binding-db-bindingdb": "git://github.com/bergos/ligand-binding-db-bindingdb.git#master",
-    "ligand-binding-processing": "git+ssh://git@home.bergnet.org:ligand-binding-processing#master",
-    "nn-mapping": "git+ssh://git@home.bergnet.org:nn-mapping#master",
+    "ligand-binding-processing": "git://github.com/bergos/ligand-binding-processing#master",
+    "nn-mapping": "git://github.com/bergos/nn-mapping#master",
     "shelljs": "^0.7.4"
   },
   "devDependencies": {
