@@ -1,7 +1,7 @@
 {
   "name": "ligand-binding-deep-learning",
   "version": "0.1.0",
-  "description": "",
+  "description": "Ligand binding affinity prediction using deep learning",
   "main": "index.js",
   "scripts": {
     "lint": "standard",
