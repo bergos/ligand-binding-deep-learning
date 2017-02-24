@@ -1,0 +1,22 @@
+{
+  "label": "5ht2a-a75-lstm300-mse",
+  "description": "Ligand binding prediction for 5-HT2a receptor using a dataset with 75 alternatives and a 300 layer LSTM model",
+  "dataset": {
+    "trainingDataJson": "../tmp/5-ht2a-a75.train.data.json",
+    "testDataJson": "../tmp/5-ht2a-a75.test.data.json"
+  },
+  "model": {
+    "ioNamesJson": "../tmp/tokens.modelio.json",
+    "topologyPython": "models/lstm300-mse.py"
+  },
+  "training": {
+    "batchSize": 128,
+    "varyingBatchSize": true,
+    "epochs": 2000,
+    "lossLogFile": "logs/5ht2a-a75-lstm300-mse.loss.csv",
+    "testLogFile": "logs/5ht2a-a75-lstm300-mse.test.csv",
+    "testLogInterval": 1,
+    "checkpointFile": "logs/5ht2a-a75-lstm300-mse.weights.{epoch:06d}.hdf5",
+    "checkpointInterval": 200
+  }
+}
