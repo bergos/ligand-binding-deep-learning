@@ -17,4 +17,4 @@ Creates all files for a specific target to train and test a neural network.
 
 The `example-5-ht2a.sh` script will generate all files to train and run the ligand binding prediction for the receptor 5-ht2a with 0 and 75 alternatives.
 Install [Keras Gaia](https://github.com/bergos/keras_gaia) to train and run the example projects in `examples/projects`.
-The pathes are relative to the `examples` folder.
+The pathss are relative to the `examples` folder.
